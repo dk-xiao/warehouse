@@ -1,99 +1,125 @@
 <template>
-<div id="login">
-<div class="div1"></div>
-<div class="div2"></div>
-<div class="div3"></div>
-<div class="div4"></div>
-<div class="div5"></div>
-<div class="div6"></div>
-<div class="div7"></div>
-<div class="div8"></div>
-<div class="div9"></div>
-</div>
+  <div id="login-page">
+    <div id="login-box">
+      <label>
+        <input class="userInfo" type="text" v-model="username" placeholder="请输入用户名">
+      </label>
+      <label>
+        <input class="userInfo" type="password" v-model="password" placeholder="密码">
+      </label>
+      <label>
+        <input id="submit" type="button" value="登录" @click="a">
+      </label>
+      <div>
+        <a href="javaScript:void(0)" @click="messageFun">
+          注册账户
+        </a>
+        <a href="javaScript:void(0)" @click="message.success({
+          message: 'this is success message'
+        })">
+          找回密码
+        </a>
+      </div>
+    </div>
+  </div>
 </template>
 
-<script>
-export default {
-  name: "loginPage",
-}
+<script setup>
+import { ref } from "vue";
+import message from "../common/message"
+import myMessage from "../common/message/myMessage"
+
+  let username = ref('')
+  let password = ref('')
+  const a = () => {
+    console.log(username.value)
+    console.log(password.value)
+  };
+  const messageFun = () => {
+    message({
+      type: 'error',
+      message: 'this is success message'
+    })
+  }
 </script>
 
 <style scoped>
-#login {
+#login-page {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(-45deg, #0ef802, #34722e 50%, #662385 50%, #bd00ff 100%);
+
+}
+#login-box {
+  background: rgba(255,255,255, 0.2);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 10px 10px 10px rgba(0,0,0,0.2);
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem 1rem 2rem 1rem;
+}
+#login-box label {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+#login-box input {
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+}
+.userInfo {
+  border: 0;
+  color: white;
+  border-bottom: 1px solid gray;
+  background-color: transparent;
+  margin: 1rem 0 1rem 0;
+  outline: none;
+}
+.userInfo::placeholder {
+  color: #b7b7b7;
+}
+.userInfo:hover {
+  border-bottom: 1px solid #b7b7b7;
+}
+#submit {
+  background: linear-gradient(to left, #ff0059, #cccccc, #ffe000, #07ff00, #00e7ff, #8c00ff, #ff0059);
+  background-size: 500%;
+  border-radius: 1rem;
+  box-shadow: 2px 2px #4f4f4f;
+  border: 0;
+  color: white;
+  cursor: pointer;
   position: relative;
 }
-.div1 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  clip-path: polygon(0 0,29% 0,43% 33%,33% 43%,0 29%);
+#submit:hover {
+  /*opacity: 0.8;*/
+  animation: animate 7s linear infinite;
 }
 
-.div2 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  /*shape-outside: polygon(0 0,29% 0,43% 33.3%,33.3% 43%,0 29%);*/
-  clip-path: polygon(29% 0,71% 0,57% 33%,43% 33%);
+@keyframes animate {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 500%;
+  }
 }
-.div3 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: yellow;
-  /*shape-outside: polygon(0 0,29% 0,43% 33.3%,33.3% 43%,0 29%);*/
-  clip-path: polygon(71% 0,100% 0%, 100% 29%,66% 43%,57% 33%);
+
+@media screen and (max-width: 400px) {
+  #login-box {
+    background: rgba(255,255,255, 0.2);
+    border-radius: 1rem;
+    backdrop-filter: blur(20px);
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.2);
+    width: calc(90% - 1rem);
+  }
 }
-.div4 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: green;
-  /*shape-outside: polygon(0 0,29% 0,43% 33.3%,33.3% 43%,0 29%);*/
-  clip-path: polygon(100% 29%,100% 71%, 66% 57%,66% 43%);
-}
-.div5 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: purple;
-  /*shape-outside: polygon(0 0,29% 0,43% 33.3%,33.3% 43%,0 29%);*/
-  clip-path: polygon(100% 71%, 100% 100%,71% 100%,57% 66%,66% 57%);
-}
-.div6 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: blue;
-  /*shape-outside: polygon(0 0,29% 0,43% 33.3%,33.3% 43%,0 29%);*/
-  clip-path: polygon(71% 100%,29% 100%,43% 66%,57% 66%);
-}
-.div7 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: orange;
-  /*shape-outside: polygon(0 0,29% 0,43% 33.3%,33.3% 43%,0 29%);*/
-  clip-path: polygon(29% 100%,0 100%,0 71%,33% 57%,43% 66%);
-}
-.div8 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: gray;
-  /*shape-outside: polygon(0 0,29% 0,43% 33.3%,33.3% 43%,0 29%);*/
-  clip-path: polygon(0 71%,0 29%,33% 43%,33% 57%);
-}
-.div9 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  /*shape-outside: polygon(0 0,29% 0,43% 33.3%,33.3% 43%,0 29%);*/
-  clip-path: polygon(43% 33%,57% 33%,66% 43%, 66% 57%,57% 66%,43% 66%,33% 57%,33% 43%);
-}
+
 </style>
